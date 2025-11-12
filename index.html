@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Аня 💗</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: radial-gradient(circle at 30% 30%, #330d1a 0%, #4d0f2f 50%, #2b0a1a 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Туман на фоні */
+    .fog {
+      position: absolute;
+      top: -20%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
+      animation: drift 60s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes drift {
+      0% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(30px, -20px) scale(1.02); }
+      100% { transform: translate(0,0) scale(1); }
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      color: #ff99cc;
+      font-size: 2.6rem;
+      text-align: center;
+      margin: 20px;
+      text-shadow: 0 2px 6px rgba(255,153,204,0.5);
+      animation: textTwinkle 3s ease-in-out infinite;
+      z-index: 3;
+    }
+
+    @keyframes textTwinkle {
+      0% { transform: translateY(0); color: #ff99cc; }
+      25% { transform: translateY(-2px); color: #ffb6c1; }
+      50% { transform: translateY(1px); color: #ffc1cc; }
+      75% { transform: translateY(-1px); color: #ff99cc; }
+      100% { transform: translateY(0); color: #ffb6c1; }
+    }
+
+    .music-control {
+      position: fixed;
+      bottom: 20px;
+      background: rgba(102, 17, 68, 0.6);
+      border: 2px solid #ff99cc;
+      padding: 10px 25px;
+      border-radius: 25px;
+      color: #ff99cc;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      z-index: 3;
+      backdrop-filter: blur(4px);
+    }
+
+    .music-control:hover {
+      background: rgba(136, 34, 85, 0.8);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #ff99cc;
+    }
+
+    /* Фото з ореолом та ефектом наведення */
+    .photo {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 25px;
+      object-fit: cover;
+      box-shadow: 0 0 25px rgba(255,153,204,0.6), 0 0 50px rgba(255,182,193,0.4), 0 6px 20px rgba(0,0,0,0.4);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 2s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 2;
+      animation: floatPhoto 8s ease-in-out infinite alternate, glow 3s ease-in-out infinite alternate;
+    }
+
+    .photo.show { opacity:1; transform: scale(1); }
+    .photo:hover { 
+      transform: scale(1.1); 
+      box-shadow: 0 0 35px rgba(255,182,193,0.7), 0 0 70px rgba(255,153,204,0.5);
+    }
+
+    @keyframes floatPhoto { from {transform:translateY(0) rotate(0deg) scale(1);} to {transform:translateY(-15px) rotate(3deg) scale(1.05);} }
+    @keyframes glow { 0% {box-shadow: 0 0 20px rgba(255,153,204,0.4), 0 0 40px rgba(255,182,193,0.3);} 50% {box-shadow: 0 0 35px rgba(255,153,204,0.6), 0 0 70px rgba(255,182,193,0.5);} 100% {box-shadow: 0 0 20px rgba(255,153,204,0.4), 0 0 40px rgba(255,182,193,0.3);} }
+
+    /* Зірочки на фоні */
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 3s ease-in-out infinite alternate, moveStar linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes twinkle { 0% {opacity:0.2;} 50% {opacity:0.8;} 100% {opacity:0.2;} }
+    @keyframes moveStar { 0% {transform: translate(0,0);} 100% {transform: translate(var(--dx,0)px,var(--dy,0)px);} }
+
+    /* Різнокольорові сердечка */
+    .heart {
+      position: fixed;
+      bottom: -10px;
+      font-size: 20px;
+      opacity: 0.8;
+      animation: floatHeart 8s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes floatHeart { 
+      0% { transform: translateY(0) rotate(0deg); } 
+      100% { transform: translateY(-120vh) rotate(360deg); } 
+    }
+
+    /* Блискітки */
+    .spark {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: fall 3s linear infinite;
+      z-index: 2;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) translateX(0); opacity:1; }
+      100% { transform: translateY(80px) translateX(10px); opacity:0; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="fog"></div>
+
+  <h1>Та, із за кого моє життя обрело новий сенс ❤️</h1>
+
+  <button class="music-control" onclick="toggleMusic()">🎵 Увімкнути / Вимкнути музику</button>
+
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const music = document.getElementById('bg-music');
+    let isPlaying = false;
+
+    function fadeInMusic() {
+      music.volume = 0;
+      const fadeInterval = setInterval(() => {
+        if (music.volume < 0.4) music.volume = Math.min(0.4, music.volume+0.02);
+        else clearInterval(fadeInterval);
+      }, 200);
+    }
+
+    document.addEventListener('click', () => {
+      if(!isPlaying){ music.play().then(()=>fadeInMusic()); isPlaying=true; }
+    }, {once:true});
+
+    function toggleMusic() {
+      if(!isPlaying){ music.play().then(()=>fadeInMusic()); isPlaying=true; }
+      else{ music.pause(); isPlaying=false; }
+    }
+
+    // Сердечка з кольорами
+    const heartColors=['#ffb6c1','#ff69b4','#ffc0cb','#ff1493','#ff82ab','#ffa6c9','#ffd1e0'];
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML='💖';
+      heart.style.left=Math.random()*100+'vw';
+      heart.style.fontSize=(Math.random()*10+15)+'px';
+      heart.style.animationDuration=(6+Math.random()*4)+'s';
+      document.body.appendChild(heart);
+
+      let colorIndex = 0;
+      const colorInterval = setInterval(() => {
+        heart.style.color = heartColors[colorIndex % heartColors.length];
+        colorIndex++;
+      }, 300);
+
+      setTimeout(()=>{ clearInterval(colorInterval); heart.remove(); },8000);
+    }
+    setInterval(createHeart,600);
+
+    // Фото
+    const photoFiles = ['аня1.jpg','аня2.jpg','аня3.jpg','аня4.jpg','аня5.jpg'];
+    function showRandomPhoto() {
+      if(photoFiles.length===0) return;
+      const file = photoFiles[Math.floor(Math.random()*photoFiles.length)];
+      const img = document.createElement('img');
+      img.src = file;
+      img.classList.add('photo');
+      img.style.top=Math.random()*70+'vh';
+      img.style.left=Math.random()*70+'vw';
+      img.style.animationDelay=(Math.random()*2)+'s';
+      img.style.animationDuration=(6+Math.random()*4)+'s';
+      document.body.appendChild(img);
+
+      setTimeout(()=>img.classList.add('show'),100);
+
+      // Таймер зникнення фото
+      let hideTimeout = setTimeout(()=>{ 
+        img.classList.remove('show'); 
+        setTimeout(()=>img.remove(),2000); 
+      },6000);
+
+      // Затримка фото при наведенні
+      img.addEventListener('mouseenter', ()=>{ clearTimeout(hideTimeout); });
+      img.addEventListener('mouseleave', ()=>{
+        hideTimeout = setTimeout(()=>{ 
+          img.classList.remove('show'); 
+          setTimeout(()=>img.remove(),2000); 
+        },3000);
+      });
+
+      // Блискітки поруч із фото
+      for(let i=0;i<5;i++){
+        const spark = document.createElement('div');
+        spark.classList.add('spark');
+        spark.style.top = (parseFloat(img.style.top) + Math.random()*50) + 'vh';
+        spark.style.left = (parseFloat(img.style.left) + Math.random()*50) + 'vw';
+        spark.style.width = spark.style.height = (Math.random()*3+1)+'px';
+        spark.style.animationDuration = (1.5 + Math.random()*2)+'s';
+        document.body.appendChild(spark);
+        setTimeout(()=>spark.remove(),3000);
+      }
+    }
+    setInterval(showRandomPhoto,2500);
+
+    // Зірочки
+    function createStars(count) {
+      for(let i=0;i<count;i++){
+        const star = document.createElement('div');
+        star.classList.add('star');
+        const dx = (Math.random()*40-20);
+        const dy = (Math.random()*40-20);
+        star.style.setProperty('--dx', dx);
+        star.style.setProperty('--dy', dy);
+        star.style.top = Math.random()*100+'vh';
+        star.style.left = Math.random()*100+'vw';
+        star.style.width = star.style.height = (Math.random()*2+1)+'px';
+        star.style.animationDuration = (2+Math.random()*3)+'s';
+        document.body.appendChild(star);
+      }
+    }
+    createStars(100);
+
+  </script>
+
+</body>
+</html>
