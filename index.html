@@ -273,6 +273,132 @@
     createStars(100);
 
   </script>
+<!-- 🌹 Заставка -->
+<div id="preloader">
+  <div class="hearts-bg"></div>
+  <div class="preloader-content">
+    <h2>Для тебе 💌</h2>
+    <p>З любов’ю, тільки для тебе...</p>
+  </div>
+</div>
+
+<style>
+  /* Заставка */
+  #preloader {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(120deg, #3a0a1b, #621c3a, #3a0a1b);
+    background-size: 400% 400%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    opacity: 1;
+    transition: opacity 2s ease;
+    animation: gradientShift 8s ease-in-out infinite;
+    overflow: hidden;
+  }
+
+  /* Анімація руху фону */
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Текст */
+  .preloader-content {
+    text-align: center;
+    color: #ffd9e8;
+    font-family: 'Great Vibes', cursive;
+    animation: fadeInText 2s ease forwards;
+    position: relative;
+    z-index: 2;
+  }
+
+  .preloader-content h2 {
+    font-size: 2.6rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 12px rgba(255,170,200,0.6);
+  }
+
+  .preloader-content p {
+    font-size: 1.2rem;
+    font-family: 'Open Sans', sans-serif;
+    color: #ffbfd6;
+  }
+
+  @keyframes fadeInText {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Сердечка на фоні */
+  .hearts-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .heart {
+    position: absolute;
+    font-size: 22px;
+    opacity: 0.7;
+    animation: floatUp 8s linear infinite;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+  }
+</style>
+
+<script>
+  const music = document.getElementById('bg-music');
+
+  // Плавне збільшення гучності
+  function fadeInMusic() {
+    music.volume = 0;
+    const fadeInterval = setInterval(() => {
+      if (music.volume < 0.4) {
+        music.volume = Math.min(0.4, music.volume + 0.02);
+      } else {
+        clearInterval(fadeInterval);
+      }
+    }, 200);
+  }
+
+  // Створення сердечок на заставці
+  const heartColors = ['#ffb6c1','#ffd1dc','#ffc1cc','#f9a5c2','#ffbbe6','#fff0f6'];
+  function createPreloaderHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerHTML = '💖';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (6 + Math.random() * 4) + 's';
+    heart.style.fontSize = (16 + Math.random() * 12) + 'px';
+    heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+    document.querySelector('.hearts-bg').appendChild(heart);
+    setTimeout(() => heart.remove(), 8000);
+  }
+  setInterval(createPreloaderHeart, 700);
+
+  // При завантаженні сторінки
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      // Починає грати музика
+      music.play().then(() => fadeInMusic());
+      // Прибираємо заставку
+      const preloader = document.getElementById('preloader');
+      preloader.style.opacity = '0';
+      setTimeout(() => preloader.remove(), 2000);
+    }, 3500);
+  });
+</script>
 
 </body>
 </html>
