@@ -150,6 +150,25 @@
       font-size: 1.2rem;
       font-family: 'Open Sans', sans-serif;
       color: #ffbfd6;
+      margin-bottom: 20px;
+    }
+
+    #enter-btn {
+      background: rgba(255,192,203,0.15);
+      border: 2px solid #ff99cc;
+      color: #ffd1dc;
+      padding: 10px 30px;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    #enter-btn:hover {
+      background: rgba(255,153,204,0.3);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #ff99cc;
     }
 
     .hearts-bg {
@@ -209,7 +228,7 @@
     setInterval(createHeart, 600);
 
     // Фото
-    const photoFiles = ['аня1.jpg','аня2.jpg','аня3.jpg','аня4.jpg','аня5.jpg']; 
+    const photoFiles = ['аня1.jpg','аня2.jpg','аня3.jpg','аня4.jpg','аня5.jpg'];
     function showRandomPhoto() {
       if (photoFiles.length === 0) return;
       const file = photoFiles[Math.floor(Math.random() * photoFiles.length)];
@@ -237,7 +256,8 @@
     <div class="hearts-bg"></div>
     <div class="preloader-content">
       <h2>Для тебе 💌</h2>
-      <p>З любов’ю, тільки для тебе...</p>
+      <p>Принцеса, ти зводиш мене з розуму❤️</p>
+      <button id="enter-btn">Натисни, щоб увійти 💖</button>
     </div>
   </div>
 
@@ -256,13 +276,12 @@
     }
     setInterval(createPreloaderHeart, 700);
 
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        music.play().then(() => fadeInMusic());
-        const preloader = document.getElementById('preloader');
-        preloader.style.opacity = '0';
-        setTimeout(() => preloader.remove(), 2000);
-      }, 3500);
+    const enterBtn = document.getElementById('enter-btn');
+    enterBtn.addEventListener('click', () => {
+      music.play().then(() => fadeInMusic());
+      const preloader = document.getElementById('preloader');
+      preloader.style.opacity = '0';
+      setTimeout(() => preloader.remove(), 2000);
     });
   </script>
 </body>
